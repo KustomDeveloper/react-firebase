@@ -1,24 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Notifications from './Notifications';
 import { connect } from 'react-redux'; 
+import WebsiteList from '../websites/WebsiteList';
 
-const Dashboard = (props) => {
-  const list = props.websites;
-  console.log(list);
+class Dashboard extends Component {
+  render() {
+  const { websites } = this.props;
+  console.log(typeof websites);
 
   return(
-
     <div className="dashboard container">
      
       <div className="row">
         <div className="col s12 m6">
-        <ul>
-          { list.map(function(a) {
-            console.log(
-                <li key={a.id}>{a.url}</li>
-            )
-          })}
-        </ul>
+          <WebsiteList websites={websites} />
         </div>
 
         <div className="col s12 m5 offset-m1">
@@ -27,6 +22,7 @@ const Dashboard = (props) => {
       </div>
     </div>
   )
+  }
 }
 
 const mapStateToProps = (state) => {
