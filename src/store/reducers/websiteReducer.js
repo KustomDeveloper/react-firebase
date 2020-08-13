@@ -8,6 +8,11 @@ const initState = {
 }
 
 const websiteReducer = (state = initState, action) => {
+  switch(action.type) {
+    case 'ADD_WEBSITE':
+      console.log('Added Website', action.website)
+  }
+  
   return state;
 }
 

@@ -13,7 +13,7 @@ const SignIn = () => {
   const formContainerStyle = {
     marginTop: "100px",
   }
-  const loginTitleStyle = {
+  const titleStyle = {
     marginBottom: "50px",
   }
 
@@ -22,7 +22,7 @@ const SignIn = () => {
       <div className="row">
         <div className="col s4 offset-s4">
           <form onSubmit={ handleSubmit } className="white">
-            <h4 style={loginTitleStyle} className="grey-text text-darken-3 ">Sign In</h4>
+            <h4 style={titleStyle} className="grey-text text-darken-3 ">Sign In</h4>
             <div className="input-field">
               <label htmlFor="email">Email</label>
               <input type="email" id="email" value={email} onChange={e => setEmail(e.target.value) }></input>
