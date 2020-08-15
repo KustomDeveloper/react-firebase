@@ -7,7 +7,6 @@ import SignedOutLinks from './SignedOutLinks';
 const Header = () => {
   return(
     <header>
-      
       <nav className="nav-wrapper grey darken-3">
         <div className="container">
           <Link to="/"><img src={Logo} className="logo"/></Link>
