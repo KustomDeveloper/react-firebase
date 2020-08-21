@@ -4,8 +4,6 @@ import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 
 const WebsiteDetails = (props) => {
-
-    console.log(props);
     const { website } = props;
 
     if (website) {
@@ -40,5 +38,5 @@ export default compose (
   connect(mapStateToProps),
   firestoreConnect([
     { collection: 'websites' }
-  ]),
-  ( WebsiteDetails ))
+  ]))
+  ( WebsiteDetails )
