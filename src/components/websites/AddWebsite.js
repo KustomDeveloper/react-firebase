@@ -39,10 +39,7 @@ const AddWebsite = (props) => {
     </div>
   </div>
  )
-
-
 }
-
 
 const matchDispatchToProps = (dispatch) => {
   return {

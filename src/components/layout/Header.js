@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Logo from '../../images/logo.svg';
 import SignedInLinks from './SignedInLinks';
 import SignedOutLinks from './SignedOutLinks';
+import { connect } from 'react-redux';
 
 const Header = () => {
   return(
@@ -18,5 +19,12 @@ const Header = () => {
   )
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+  console.log(state);
+  return{
+
+  }
+}
+
+export default connect(mapStateToProps)(Header);
     
