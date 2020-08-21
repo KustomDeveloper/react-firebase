@@ -1,11 +1,16 @@
 import React from 'react';
+import { Link } from  'react-router-dom'
 import WebsiteDetails from './WebsiteDetails';
 
 const WebsiteList = ({websites}) => {
     return(
         <div>
             {websites && websites.map(website => {
-                return <WebsiteDetails website={website} key={website.id}/>
+                return (
+                <Link to={'/website/' + website.id}> 
+                    <WebsiteDetails website={website} key={website.id} />
+                </Link>
+                )
             })}
         </div>
     )
