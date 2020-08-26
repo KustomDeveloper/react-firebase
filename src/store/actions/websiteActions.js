@@ -4,9 +4,14 @@ export const addWebsite = (website) => {
       // Call to DB
       const firestore = getFirestore();
 
+      //Get profile state
+      const profile = getState().firebase.profile;
+
+      const authorId = getState().firebase.auth.uid;
+
       firestore.collection('websites').add({
         url: website, 
-        authorID: 12345,
+        authorID: authorId,
         createdAt: new Date()
 
       }).then(() => {

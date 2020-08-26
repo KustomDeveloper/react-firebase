@@ -1,17 +1,25 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { signUp } from '../../store/actions/authActions';
 
-const SignUp = () => {
+const SignUp = (props) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { authError, auth } = props; 
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(firstName);
-    console.log(lastName);
-    console.log(email);
-    console.log(password);
+
+    props.signUp({ 
+      firstName, 
+      lastName,
+      email, 
+      password 
+    });
   }
 
   const formContainerStyle = {
@@ -20,6 +28,8 @@ const SignUp = () => {
   const loginTitleStyle = {
     marginBottom: "50px",
   }
+
+  if(auth.uid) return <Redirect to='/' />
 
   return(
     <div style={formContainerStyle} className="container">
@@ -45,6 +55,9 @@ const SignUp = () => {
             </div>
             <div className="input-field">
               <button className="btn pink lighten-1 z-depth-0">Login</button>
+              <div className="red-text center">
+                { authError ? <p>{ authError }</p> : null }
+              </div>
             </div>
           </form>
         </div>
@@ -53,4 +66,17 @@ const SignUp = () => {
   )
 }
 
-export default SignUp;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+    authError: state.auth.authError
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signUp: (newUser) => dispatch(signUp(newUser)) 
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

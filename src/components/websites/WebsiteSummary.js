@@ -1,12 +1,16 @@
-import React from 'react'
+import React from 'react';
+import moment from 'moment';
 
 const WebsiteSummary = ({website}) => {
+
   return (
     <div className="card z-depth-0 website-summary">
       <div className="card-content grey-text text-darken-3">
-        <span className="card-title ">{website.url}</span>
-        <p>Created on:</p>
-        <p className="grey-text">8-21-2020</p>
+        <li>
+        {website.url} <br/>
+
+        <small>Created On: {moment(website.createdAt.toDate()).calendar()}</small>
+        </li>
       </div>
     </div>
   )

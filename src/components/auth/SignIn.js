@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import  { signIn } from '../../store/actions/authActions';
+import { useHistory, Redirect } from 'react-router-dom';
 
-const SignIn = () => {
+const SignIn = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
+
+  const { authError, auth } = props; 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email);
-    console.log(password);
+    console.log(props);
+    props.signIn({email, password});
+
+    history.push('/');
   }
 
   const formContainerStyle = {
@@ -16,7 +24,9 @@ const SignIn = () => {
   const titleStyle = {
     marginBottom: "50px",
   }
-
+  
+  if(auth.uid) return <Redirect to='/' />
+  
   return(
     <div style={formContainerStyle} className="container">
       <div className="row">
@@ -33,6 +43,9 @@ const SignIn = () => {
             </div>
             <div className="input-field">
               <button className="btn pink lighten-1 z-depth-0">Login</button>
+              <div className="red-text center">
+              { authError ? <p>{authError}</p> : null }
+              </div>
             </div>
           </form>
         </div>
@@ -40,5 +53,16 @@ const SignIn = () => {
   </div>
   )
 }
+const mapStateToProps = (state) => {
+  return {
+    authError: state.auth.authError,
+    auth: state.firebase.auth
+  }
+}
+const mapDispatchToProps = dispatch => {
+  return {
+    signIn: (credentials) => dispatch(signIn(credentials)) 
+  }
+}
 
-export default SignIn;
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
