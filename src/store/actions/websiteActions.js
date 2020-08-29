@@ -12,7 +12,8 @@ export const addWebsite = (website) => {
       firestore.collection('websites').add({
         url: website, 
         authorID: authorId,
-        createdAt: new Date()
+        createdAt: new Date(),
+        lastCheckedTime: new Date()
 
       }).then(() => {
         dispatch({ type: 'ADD_WEBSITE', website });
